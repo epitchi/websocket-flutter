@@ -54,7 +54,12 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             SizedBox(height: 24.0,),
-            Text("data"),
+            StreamBuilder(
+              stream: channel.stream,
+              builder: (context, snapshot){
+                return Text(snapshot.hasData ? '${snapshot.data}' :'');
+              },
+            )
           ],
         ),
       ),
