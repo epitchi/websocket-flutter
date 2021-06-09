@@ -64,10 +64,23 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: sendMessage,
         tooltip: 'Send message',
         child: Icon(Icons.send),
       )
     );
   }
+
+  void sendMessage(){
+    if (controller.text.isNotEmpty){
+      channel.sink.add(controller.text);
+    }
+  }
+
+  @override
+  void dispose() {
+    channel.sink.close();
+    super.dispose();
+  }
+  
 }
