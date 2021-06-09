@@ -21,16 +21,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -43,6 +33,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final channel = WebSocketChannel.connect(
   Uri.parse('wss://echo.websocket.org'),
 );
+  final TextEditingController controller = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +42,27 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Form(
+              child: TextFormField(
+                controller: controller,
+                decoration: InputDecoration(labelText: 'Send a message'),
+              ),
+            ),
+            SizedBox(height: 24.0,),
+            Text("data"),
+          ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: 'Send message',
+        child: Icon(Icons.send),
+      )
     );
   }
 }
